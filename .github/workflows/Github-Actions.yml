@@ -43,5 +43,11 @@ jobs:
         gcloud auth list
         gcloud iam service-accounts list
 
+    - name: Debug working directory
+      run: |
+        pwd
+        ls -la
+        find . -maxdepth 3 -type f
+
     - name: Run scrapper
       run: node index.js
