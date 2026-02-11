@@ -1,4 +1,10 @@
 {
+  "name": "tcgplayer-scraper",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "node src/index.js"
+  },
   "dependencies": {
     "googleapis": "^171.4.0",
     "playwright": "^1.58.2"
