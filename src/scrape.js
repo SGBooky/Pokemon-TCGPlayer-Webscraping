@@ -7,20 +7,21 @@ export async function scrapeTCGPlayer() {
   });
 
   //const context = await browser.newContext();
+  const context = await browser.newContext();
+
   const cookiesString = await fs.readFile('cookies.json', 'utf8');
   const rawCookies = JSON.parse(cookiesString);
-
   const cookies = rawCookies.map(({ sameSite, ...rest }) => rest);
 
   await context.addCookies(cookies);
 
-  const page = await context.newPage();
-  //const page = await browser.newPage();
 
   await context.setExtraHTTPHeaders({
   "User-Agent":
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
 });
+
+  const page = await context.newPage();
 
   await page.setViewportSize({ width: 1280, height: 800 });
 
