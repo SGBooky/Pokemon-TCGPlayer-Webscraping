@@ -24,6 +24,8 @@ async function scrapeTCGPlayer() {
   console.log("Prices:", prices);
 
   await browser.close();
+
+  return prices;
 }
 
 scrapeTCGPlayer();
