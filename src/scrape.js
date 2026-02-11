@@ -14,7 +14,7 @@ export async function scrapeTCGPlayer() {
 
   // Wait for listings to appear
   await page.waitForSelector(".listing-item__listing-data__info__price", 
-    { timeout: 60000 }
+    { timeout: 200000 }
   );
 
   // Extract all prices
