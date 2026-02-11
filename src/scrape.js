@@ -1,6 +1,6 @@
-const { chromium } = require("playwright");
+import { chromium } from "playwright";
 
-async function scrapeTCGPlayer() {
+export async function scrapeTCGPlayer() {
   const browser = await chromium.launch({
     headless: true   // set false to watch it work locally
   });
