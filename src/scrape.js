@@ -2,7 +2,7 @@ import { chromium } from "playwright";
 
 export async function scrapeTCGPlayer() {
   const browser = await chromium.launch({
-    headless: false   // set false to watch it work locally
+    headless: true   // set false to watch it work locally
   });
 
   const page = await browser.newPage();
