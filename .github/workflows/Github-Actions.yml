@@ -1,9 +1,10 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Scrape TCGPlayer → Google Sheets
+run-name: ${{ github.actor }} is scraping TCGPlayer 🚀
+#change to on: to like every day or so
 on: [push]
 
 jobs:
-  job_id:
+  scrape:
     runs-on: ubuntu-latest
 
     # Required permissions for Workload Identity Federation
@@ -12,8 +13,13 @@ jobs:
       id-token: 'write'
 
     steps:
-    - name: Checkout code
+    - name: Checkout repo
       uses: 'actions/checkout@v4'
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
 
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
@@ -30,3 +36,6 @@ jobs:
       run: |-
         gcloud auth list
         gcloud iam service-accounts list
+
+    - name: Run scrapper
+      run: node src/index.js
