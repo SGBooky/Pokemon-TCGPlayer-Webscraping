@@ -6,9 +6,12 @@ export async function scrapeTCGPlayer() {
     headless: true   // set false to watch it work locally
   });
 
-  const context = await browser.newContext();
+  //const context = await browser.newContext();
   const cookiesString = await fs.readFile('cookies.json', 'utf8');
-  const cookies = JSON.parse(cookiesString);
+  const rawCookies = JSON.parse(cookiesString);
+
+  const cookies = rawCookies.map(({ sameSite, ...rest }) => rest);
+
   await context.addCookies(cookies);
 
   const page = await context.newPage();
