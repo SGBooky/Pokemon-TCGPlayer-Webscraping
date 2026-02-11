@@ -26,4 +26,4 @@ async function scrapeTCGPlayer() {
   await browser.close();
 }
 
-scrapeTCPlayer();
+scrapeTCGPlayer();
