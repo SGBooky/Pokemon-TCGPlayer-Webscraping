@@ -21,6 +21,12 @@ jobs:
       with:
         node-version: 20
 
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Install Playwright Chromium
+      run: npx playwright install chromium
+
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v2' # Note: v2 is the standard stable version
