@@ -1,8 +1,8 @@
 const { chromium } = require("playwright");
 
-async function scrapeTCGplayer() {
+async function scrapeTCGPlayer() {
   const browser = await chromium.launch({
-    headless: true   // set false to watch it work
+    headless: true   // set false to watch it work locally
   });
 
   const page = await browser.newPage();
@@ -26,4 +26,4 @@ async function scrapeTCGplayer() {
   await browser.close();
 }
 
-scrapeTCGplayer();
+scrapeTCPlayer();
