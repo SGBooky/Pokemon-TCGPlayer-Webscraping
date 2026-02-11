@@ -44,4 +44,4 @@ jobs:
         gcloud iam service-accounts list
 
     - name: Run scrapper
-      run: node src/index.js
+      run: node index.js
