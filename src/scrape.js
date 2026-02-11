@@ -3,7 +3,17 @@ import fs from 'fs/promises';
 
 export async function scrapeTCGPlayer() {
   const browser = await chromium.launch({
-    headless: true   // set false to watch it work locally
+    headless: false,   // set false to watch it work locally
+    args: [
+    '--no-sandbox',
+    '--disable-setuid-sandbox',
+    '--disable-blink-features=AutomationControlled'
+  ]
+  });
+
+  await context.setExtraHTTPHeaders({
+    "User-Agent":
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
   });
 
   //const context = await browser.newContext();
@@ -15,11 +25,6 @@ export async function scrapeTCGPlayer() {
 
   await context.addCookies(cookies);
 
-
-  await context.setExtraHTTPHeaders({
-  "User-Agent":
-    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
-});
 
   const page = await context.newPage();
 
