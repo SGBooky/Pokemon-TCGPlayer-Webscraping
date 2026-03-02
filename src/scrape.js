@@ -11,13 +11,12 @@ export async function scrapeTCGPlayer() {
   ]
   });
 
+  const context = await browser.newContext();
+
   await context.setExtraHTTPHeaders({
     "User-Agent":
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36"
   });
-
-  //const context = await browser.newContext();
-  const context = await browser.newContext();
 
   const cookiesString = await fs.readFile('cookies.json', 'utf8');
   const rawCookies = JSON.parse(cookiesString);
@@ -35,9 +34,9 @@ export async function scrapeTCGPlayer() {
     { waitUntil: "networkidle" }
   );
 
-  console.log("URL:", page.url());
-  console.log("Title:", await page.title());
-  console.log("Snippet:", (await page.content()).slice(0, 500));
+  // console.log("URL:", page.url());
+  // console.log("Title:", await page.title());
+  // console.log("Snippet:", (await page.content()).slice(0, 500));
 
   // Wait for listings to appear
   await page.waitForSelector(".listing-item__listing-data__info__price", 
@@ -51,8 +50,8 @@ export async function scrapeTCGPlayer() {
     ".listing-item__listing-data__info__price",
     elements => elements.map(el => el.textContent.trim())
   );
-
-  //console.log("Prices:", prices);
+  // PRICES PRINTED HERE
+  console.log("Prices:", prices);
 
   await browser.close();
 

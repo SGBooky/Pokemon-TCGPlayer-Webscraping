@@ -8,7 +8,7 @@ async function main() {
 
   console.log(`Found ${prices.length} prices`);
 
-  await writeToSheet(prices);
+  // await writeToSheet(prices);
 
   console.log("Sheet updated successfully");
 }

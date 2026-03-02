@@ -1,0 +1,1 @@
+TO RUN USE npm start in the src folder. 
