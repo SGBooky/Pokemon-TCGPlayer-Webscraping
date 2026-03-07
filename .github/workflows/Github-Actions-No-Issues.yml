@@ -3,30 +3,28 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 
 jobs:
-  job_id:
+  check-main:
     runs-on: ubuntu-latest
 
-    # Required permissions for Workload Identity Federation
-    permissions:
-      contents: 'read'
-      id-token: 'write'
-
     steps:
-    - name: Checkout code
-      uses: 'actions/checkout@v4'
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    # - id: 'auth'
-    #   name: 'Authenticate to Google Cloud'
-    #   uses: 'google-github-actions/auth@v2' # Note: v2 is the standard stable version
-    #   with:
-    #     project_id: 'project-7b4216e1-eca3-49b8-bca'
-    #     # FIX 1: Point to the Provider path
-    #     workload_identity_provider: 'projects/742749349988/locations/global/workloadIdentityPools/github-demo-pool/providers/github'
-    #     # FIX 2: Specify the Service Account to impersonate
-    #     service_account: 'pokemon-webscraper@project-7b4216e1-eca3-49b8-bca.iam.gserviceaccount.com'
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: "package-lock.json"
 
-    # Example step to verify it works
-    - name: 'Verify Auth'
-      run: |-
-        gcloud auth list
-        gcloud iam service-accounts list
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check src/index.js
+          node --check src/scrape.js
+          node --check src/sheets.js
+
+      - name: Verify entrypoint can load
+        run: node -e "import('./src/index.js')"
