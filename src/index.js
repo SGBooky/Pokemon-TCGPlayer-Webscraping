@@ -6,7 +6,7 @@ async function main() {
 
   const prices = await scrapeTCGPlayer();
 
-  console.log(`Found ${prices.length} prices`);
+  //console.log(`Found ${prices.length} prices`);
 
   // await writeToSheet(prices);
 

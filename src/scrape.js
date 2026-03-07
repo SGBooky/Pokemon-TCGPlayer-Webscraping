@@ -29,31 +29,37 @@ export async function scrapeTCGPlayer() {
 
   await page.setViewportSize({ width: 1280, height: 800 });
 
-  await page.goto(
+  // await page.goto(
+  //   "https://www.tcgplayer.com/product/91146?Language=English&Condition=Near+Mint&page=1",
+  //   { waitUntil: "networkidle" }
+  // );
+
+  // await page.goto(
+  //   "https://www.tcgplayer.com/product/42346/pokemon-base-set-alakazam?page=1&Language=English&Condition=Near+Mint",
+  //   { waitUntil: "networkidle" }
+  // );
+
+  const urlPages = [
+    "https://www.tcgplayer.com/product/42346/pokemon-base-set-alakazam?page=1&Language=English&Condition=Near+Mint",
     "https://www.tcgplayer.com/product/91146?Language=English&Condition=Near+Mint&page=1",
-    { waitUntil: "networkidle" }
-  );
+  ];
 
-  // console.log("URL:", page.url());
-  // console.log("Title:", await page.title());
-  // console.log("Snippet:", (await page.content()).slice(0, 500));
+  for (const url of urlPages) {
+    await page.goto(url, { waitUntil: "networkidle" });
+    // Wait for listings to appear
+    await page.waitForSelector(".listing-item__listing-data__info__price", 
+      { timeout: 10000 }
+    );
+    // Extract all prices
+    const prices = await page.$$eval(
+      ".listing-item__listing-data__info__price",
+      elements => elements.map(element => element.textContent.trim())
+    );
+    // PRICES PRINTED HERE
+    console.log("Prices:", prices);
 
-  // Wait for listings to appear
-  await page.waitForSelector(".listing-item__listing-data__info__price", 
-    { timeout: 50000 }
-  );
-
-  console.log(await page.content());
-
-  // Extract all prices
-  const prices = await page.$$eval(
-    ".listing-item__listing-data__info__price",
-    elements => elements.map(el => el.textContent.trim())
-  );
-  // PRICES PRINTED HERE
-  console.log("Prices:", prices);
+  }
 
   await browser.close();
 
-  return prices;
 }
