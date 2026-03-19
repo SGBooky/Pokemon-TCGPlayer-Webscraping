@@ -24,24 +24,15 @@ export async function scrapeTCGPlayer() {
 
   await context.addCookies(cookies);
 
-
   const page = await context.newPage();
 
   await page.setViewportSize({ width: 1280, height: 800 });
 
-  // await page.goto(
-  //   "https://www.tcgplayer.com/product/91146?Language=English&Condition=Near+Mint&page=1",
-  //   { waitUntil: "networkidle" }
-  // );
-
-  // await page.goto(
-  //   "https://www.tcgplayer.com/product/42346/pokemon-base-set-alakazam?page=1&Language=English&Condition=Near+Mint",
-  //   { waitUntil: "networkidle" }
-  // );
+  const allPrices = [];
 
   const urlPages = [
     "https://www.tcgplayer.com/product/236377/pokemon-swsh05-battle-styles-v-strikers-tin-tyranitar-v?Language=English&page=1",
-    // "https://www.tcgplayer.com/product/42346/pokemon-base-set-alakazam?page=1&Language=English&Condition=Near+Mint",
+    "https://www.tcgplayer.com/product/42346/pokemon-base-set-alakazam?page=1&Language=English&Condition=Near+Mint",
     // "https://www.tcgplayer.com/product/91146?Language=English&Condition=Near+Mint&page=1",
     // "https://www.tcgplayer.com/product/90113/pokemon-neo-discovery-tyranitar-12?Language=English&Condition=Near+Mint&page=1",
     // "https://www.tcgplayer.com/product/241764/pokemon-swsh06-chilling-reign-weezing?Language=English&Condition=Near+Mint&page=1",
@@ -66,11 +57,21 @@ export async function scrapeTCGPlayer() {
       elements => elements.map(element => element.textContent.trim())
     );
 
-    // PRICES PRINTED HERE
-    console.log("Prices:", prices);
+    //console.log("Prices:", prices);
+    // allPrices.push(...prices);
+
+    // prices.forEach(price => {
+    //   console.log(price);
+    // });
+
+    const firstPrice = prices[0];
+    console.log("Price:", firstPrice);
+    allPrices.push(firstPrice);
 
   }
 
   await browser.close();
+
+  return allPrices;
 
 }
