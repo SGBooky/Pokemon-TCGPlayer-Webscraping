@@ -1,14 +1,15 @@
+import { run } from "./sheets.js";
 import { scrapeTCGPlayer } from "./scrape.js";
-import { writeToSheet } from "./sheets.js";
 
 async function main() {
   console.log("Starting scrape...");
 
   const prices = await scrapeTCGPlayer();
 
-  //console.log(`Found ${prices.length} prices`);
+  //console.log(`Found ${prices} prices`);
 
-  // await writeToSheet(prices);
+  console.log("Updating Google Sheet...");
+  await run(prices);
 
   console.log("Sheet updated successfully");
 }

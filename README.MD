@@ -1,6 +1,12 @@
-# Make sure npx playwright install  
+# Make sure 
+* npx playwright
+* npm install googleapis
+* npm install -g @google/clasp
+* download google cloud console https://docs.cloud.google.com/sdk/docs/install-sdk
+* then gcloud auth application-default login --scopes=https://www.googleapis.com/auth/spreadsheets,https://www.googleapis.com/auth/cloud-platform
 
 # TO RUN USE npm start in the src folder.
+
 
 * TO DO: Store the data in a database and use web GUI probably with google cloud Then setup ETL that scrapes every x hours and puts it into google sheets
 
