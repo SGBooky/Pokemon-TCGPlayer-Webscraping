@@ -1,6 +1,6 @@
 import { google } from "googleapis";
 
-const SPREADSHEET_ID = "15_A4hHPzcQuyXic2lT1uqGv1hNBxFhkxMroVx3oQW0o";
+const SPREADSHEET_ID = "";
 
 export async function run(prices, shippingCosts) {
   // This uses your gcloud login automatically
@@ -14,14 +14,6 @@ export async function run(prices, shippingCosts) {
     version: "v4",
     auth: authClient,
   });
-
-  // READ data
-  // const readRes = await sheets.spreadsheets.values.get({
-  //   spreadsheetId: SPREADSHEET_ID,
-  //   range: "Investments!A1:X10",
-  // });
-
-  // console.log("Data:", readRes.data.values);
 
   const cellMap = [ // Map each price to a specific cell in the spreadsheet
     { range: "Investments!G2", price: prices[0] },
@@ -39,10 +31,13 @@ export async function run(prices, shippingCosts) {
     { range: "Investments!G15", price: prices[12] },
     { range: "Investments!G16", price: prices[13] },
     { range: "Investments!G18", price: prices[14] },
-
-
-
-
+    { range: "Investments!G20", price: prices[15] },
+    { range: "Investments!G21", price: prices[16] },
+    { range: "Investments!G22", price: prices[17] },
+    { range: "Investments!G23", price: prices[18] },
+    { range: "Investments!G24", price: prices[19] },
+    { range: "Investments!G25", price: prices[20] },
+    { range: "Investments!G26", price: prices[21] },
   ];
 
   const cellMapShipping = [ // Map each shipping cost to a specific cell in the spreadsheet
@@ -61,6 +56,13 @@ export async function run(prices, shippingCosts) {
     { range: "Investments!H15", price: shippingCosts[12] },
     { range: "Investments!H16", price: shippingCosts[13] },
     { range: "Investments!H18", price: shippingCosts[14] },
+    { range: "Investments!H20", price: shippingCosts[15] },
+    { range: "Investments!H21", price: shippingCosts[16] },
+    { range: "Investments!H22", price: shippingCosts[17] },
+    { range: "Investments!H23", price: shippingCosts[18] },
+    { range: "Investments!H24", price: shippingCosts[19] },
+    { range: "Investments!H25", price: shippingCosts[20] },
+    { range: "Investments!H26", price: shippingCosts[21] },
   ];
 
   for (const { range, price } of cellMap) {

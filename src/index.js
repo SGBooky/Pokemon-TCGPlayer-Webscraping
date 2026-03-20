@@ -7,7 +7,7 @@ async function main() {
 
   const { prices, shippingCosts } = await scrapeTCGPlayer();
 
-  console.log("Shipping costs:", shippingCosts);
+  //console.log("Shipping costs:", shippingCosts);
 
   //console.log(`Found ${prices} prices`);
 

@@ -32,6 +32,7 @@ export async function scrapeTCGPlayer() {
   const allShippingCosts = [];
 
   const urlPages = [
+    // sealed products
     "https://www.tcgplayer.com/product/242819/pokemon-celebrations-celebrations-mini-tin-alola?xid=pia5d6b29a-2024-474d-8850-88d072dfec3d&Language=English&page=1",
     "https://www.tcgplayer.com/product/236377/pokemon-swsh05-battle-styles-v-strikers-tin-tyranitar-v?Language=English&page=1&ListingType=standard",
     "https://www.tcgplayer.com/product/220310/pokemon-miscellaneous-cards-and-products-v-powers-tin-eevee-v?page=1&Language=English",
@@ -47,7 +48,14 @@ export async function scrapeTCGPlayer() {
     "https://www.tcgplayer.com/product/282401/pokemon-swsh11-lost-origin-sword-and-shield-ultra-premium-collection-charizard?xid=pi85d29ad1-5d54-42e6-b6aa-4677b0f263de&page=1&Language=English",
     "https://www.tcgplayer.com/product/242820/pokemon-celebrations-celebrations-mini-tin-galar?xid=pi3b076d09-3032-448e-b889-a2ef08e54c7c&Language=English&page=1",
     "https://www.tcgplayer.com/product/242809/pokemon-celebrations-celebrations-collection-dark-sylveon-v?Language=English",
-    
+    // singles 
+    "https://www.tcgplayer.com/product/250332/pokemon-celebrations-classic-collection-umbreon-star?Language=English&page=1&Condition=Near+Mint",
+    "https://www.tcgplayer.com/product/195296/Pokemon-SM%20Unified%20Minds-Mistys%20Favor%20Full%20Art?xid=a38172972-999c-4f54-9060-6ad63eca2fc6&Language=English&Condition=Near+Mint&page=1&ListingType=standard",
+    "https://www.tcgplayer.com/product/250295/Pokemon-Celebrations-Mew%20Secret?xid=a7e91fd8f-e341-48fe-af43-3ceca18ac5bc&Language=English",
+    "https://www.tcgplayer.com/product/257293/pokemon-swsh09-brilliant-stars-charizard-vstar?Language=English&page=1&Condition=Near+Mint",
+    "https://www.tcgplayer.com/product/194917/Pokemon-SM%20Unified%20Minds-Rowlet%20and%20Alolan%20Exeggutor%20GX%20Alternate%20Full%20Art?xid=ae6e7a9dd-b43c-4ca6-acae-eb573b1a986b&Language=English&Condition=Near+Mint&page=1&ListingType=standard",
+    "https://www.tcgplayer.com/product/241873/Pokemon-SWSH06%20Chilling%20Reign-Electrode%20Secret?xid=af2cbe748-87bc-44c9-ae35-1591ea433b9e&Language=English",
+    "https://www.tcgplayer.com/product/246700/Pokemon-SWSH07%20Evolving%20Skies-Sylveon%20V%20Alternate%20Full%20Art?xid=a36eec985-3cc0-4635-8738-00677502c53a&Language=English&Condition=Near+Mint&page=1",
   ];
 
   for (const url of urlPages) {
@@ -102,8 +110,8 @@ export async function scrapeTCGPlayer() {
 
       let shippingText = null;
       for (const selector of shippingSelectorCandidates) {
-        const el = listing.querySelector(selector);
-        const value = el?.textContent?.trim();
+        const htmlDOMSearch = listing.querySelector(selector);
+        const value = htmlDOMSearch?.textContent?.trim();
         if (value) {
           shippingText = value;
           break;
@@ -120,15 +128,9 @@ export async function scrapeTCGPlayer() {
       };
     }).catch(() => ({ price: null, shippingCost: null }));
 
-    //console.log("Prices:", prices);
-    // allPrices.push(...prices);
-
-    // prices.forEach(price => {
-    //   console.log(price);
-    // });
-
     const firstPrice = firstListingData.price;
     const firstShippingCost = firstListingData.shippingCost;
+
     if (!firstPrice) {
       console.log("No price found, skipping:", url);
       allPrices.push(null);
