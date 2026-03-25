@@ -1,6 +1,9 @@
 import { google } from "googleapis";
+import dotenv from "dotenv";
 
-const SPREADSHEET_ID = "";
+dotenv.config();
+
+const SPREADSHEET_ID = process.env.SPREADSHEET_ID;
 
 export async function run(prices, shippingCosts) {
   // This uses your gcloud login automatically

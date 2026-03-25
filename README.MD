@@ -3,6 +3,7 @@ The purpose of this project is to be able to get any card from any condition fro
 
 # Make sure to have these installed
 * npx playwright
+* npm install dotenv
 * npm install googleapis
 * npm install -g @google/clasp
 * download google cloud console https://docs.cloud.google.com/sdk/docs/install-sdk
