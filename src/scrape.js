@@ -30,36 +30,87 @@ export async function scrapeTCGPlayer() {
 
   const allPrices = [];
   const allShippingCosts = [];
+  const allNames = [];
 
   const urlPages = [
     // sealed products
-    "https://www.tcgplayer.com/product/242819/pokemon-celebrations-celebrations-mini-tin-alola?xid=pia5d6b29a-2024-474d-8850-88d072dfec3d&Language=English&page=1",
-    "https://www.tcgplayer.com/product/236377/pokemon-swsh05-battle-styles-v-strikers-tin-tyranitar-v?Language=English&page=1&ListingType=standard",
-    "https://www.tcgplayer.com/product/220310/pokemon-miscellaneous-cards-and-products-v-powers-tin-eevee-v?page=1&Language=English",
-    "https://www.tcgplayer.com/product/220308/pokemon-miscellaneous-cards-and-products-v-powers-tin-pikachu-v?Language=English&page=1",
-    "https://www.tcgplayer.com/product/220311/pokemon-miscellaneous-cards-and-products-v-powers-tin-eternatus-v?Language=English&page=1",
-    "https://www.tcgplayer.com/product/245143/Pokemon-SWSH04%20Vivid%20Voltage-Vivid%20Voltage%20Sleeved%20Booster%20Pack?xid=a29ef3824-098a-4104-9d9e-1356230903a2&Language=English",
-    "https://www.tcgplayer.com/product/257320/Pokemon-SWSH03%20Darkness%20Ablaze-Darkness%20Ablaze%20Sleeved%20Booster%20Pack?xid=a7979d400-dd7f-4a08-ba50-b14496009624&Language=English",
-    "https://www.tcgplayer.com/product/256125/Pokemon-SWSH09%20Brilliant%20Stars-Brilliant%20Stars%20Sleeved%20Booster%20Pack?xid=a03827f9a-25db-41de-ba04-a79e82b61c30&Language=English",
-    "https://www.tcgplayer.com/product/616825/Pokemon-SM%20Guardians%20Rising-Guardians%20Rising%20Sleeved%20Booster%20Pack?xid=a27d33776-5dc3-4b5f-9c86-c19ef40b1ac0&Language=English",
-    "https://www.tcgplayer.com/product/257718/pokemon-miscellaneous-cards-and-products-poke-ball-tin-display-q4-2021?Language=English&page=1",
-    "https://www.tcgplayer.com/product/514256/pokemon-miscellaneous-cards-and-products-pokemon-collectors-chest-plus-pencil-case?page=1&Language=English",
-    "https://www.tcgplayer.com/product/532539/pokemon-miscellaneous-cards-and-products-sinnoh-stars-mini-tins-5-pack?srsltid=AfmBOopV95h039-bOZC9zqGU_R-RbVnABFU8ZcI2NfYgrU6D8IN3OEFz&Language=all",
-    "https://www.tcgplayer.com/product/282401/pokemon-swsh11-lost-origin-sword-and-shield-ultra-premium-collection-charizard?xid=pi85d29ad1-5d54-42e6-b6aa-4677b0f263de&page=1&Language=English",
-    "https://www.tcgplayer.com/product/242820/pokemon-celebrations-celebrations-mini-tin-galar?xid=pi3b076d09-3032-448e-b889-a2ef08e54c7c&Language=English&page=1",
-    "https://www.tcgplayer.com/product/242809/pokemon-celebrations-celebrations-collection-dark-sylveon-v?Language=English",
-    // singles 
-    "https://www.tcgplayer.com/product/250332/pokemon-celebrations-classic-collection-umbreon-star?Language=English&page=1&Condition=Near+Mint",
-    "https://www.tcgplayer.com/product/195296/Pokemon-SM%20Unified%20Minds-Mistys%20Favor%20Full%20Art?xid=a38172972-999c-4f54-9060-6ad63eca2fc6&Language=English&Condition=Near+Mint&page=1&ListingType=standard",
-    "https://www.tcgplayer.com/product/250295/Pokemon-Celebrations-Mew%20Secret?xid=a7e91fd8f-e341-48fe-af43-3ceca18ac5bc&Language=English",
-    "https://www.tcgplayer.com/product/257293/pokemon-swsh09-brilliant-stars-charizard-vstar?Language=English&page=1&Condition=Near+Mint",
-    "https://www.tcgplayer.com/product/194917/Pokemon-SM%20Unified%20Minds-Rowlet%20and%20Alolan%20Exeggutor%20GX%20Alternate%20Full%20Art?xid=ae6e7a9dd-b43c-4ca6-acae-eb573b1a986b&Language=English&Condition=Near+Mint&page=1&ListingType=standard",
-    "https://www.tcgplayer.com/product/241873/Pokemon-SWSH06%20Chilling%20Reign-Electrode%20Secret?xid=af2cbe748-87bc-44c9-ae35-1591ea433b9e&Language=English",
-    "https://www.tcgplayer.com/product/246700/Pokemon-SWSH07%20Evolving%20Skies-Sylveon%20V%20Alternate%20Full%20Art?xid=a36eec985-3cc0-4635-8738-00677502c53a&Language=English&Condition=Near+Mint&page=1",
+    "https://www.tcgplayer.com/product/45133/pokemon-jungle-nidoqueen-7?Condition=Moderately+Played&Language=English&page=1",
+
+    "https://www.tcgplayer.com/product/44422/pokemon-fossil-muk-13?Language=English&Condition=Moderately+Played&page=1",
+    "https://www.tcgplayer.com/product/85673/pokemon-expedition-gengar-48?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/42417/pokemon-base-set-computer-search?srsltid=AfmBOopxbJtQLolm1tI_hPaCfrR6qgEN5i8N8P0osoQ6AIQVsyUbJRRy&Language=English&Condition=Moderately+Played&page=1",
+    "https://www.tcgplayer.com/product/86744/pokemon-neo-destiny-light-machamp?srsltid=AfmBOopj4o73Li7gGFIDaZg7s7lcDIF5-uxQrx8wc1nniZswaihZm0a6&Language=English&Condition=Moderately+Played&page=1",
+    "https://www.tcgplayer.com/product/87524/pokemon-gym-heroes-misty-102?Language=English&page=1&Condition=Moderately+Played",
+
+    "https://www.tcgplayer.com/product/83538/pokemon-expedition-ampharos-2?Condition=Moderately+Played&Language=English&page=1&Printing=Holofoil",
+    "https://www.tcgplayer.com/product/86737/Pokemon-Neo%20Destiny-Light%20Dragonair?xid=ad99a82ce-173c-416d-8ed0-774da8955431&Language=English&Condition=Moderately+Played&page=1",
+    "https://www.tcgplayer.com/product/45163/pokemon-jungle-pikachu?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/88882/Pokemon-Gym%20Challenge-Sabrinas%20Kadabra?xid=a355e1077-d770-47a2-8112-d6df11ca7ff0&Language=English&Condition=Moderately+Played&page=1",
+    "https://www.tcgplayer.com/product/85415/pokemon-expedition-feraligatr-46?Condition=Moderately+Played&Language=English&page=1",
+
+    "https://www.tcgplayer.com/product/89007/pokemon-ruby-and-sapphire-scyther-ex?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/87394/pokemon-wotc-promo-mew-8?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/86649/pokemon-nintendo-promos-latias-014-pokemon-heroes-latios-and-latias-dvd-release?country=US&utm_campaign=20451986774&utm_source=google&utm_medium=cpc&utm_content=&utm_term=&adgroupid=&gad_source=1&gad_campaignid=20451985907&gbraid=0AAAAADHLWY3P2xQVXRV6Fki1gIWUd5WR8&gclid=CjwKCAjwspPOBhB9EiwATFbi5Bkl6myypi5aqkEke-iMWkRON4wfhvfNSNtHWVCwlObDf0MGIs8slhoCbiMQAvD_BwE&Language=English&Condition=Moderately+Played&page=1",
+
+    "https://www.tcgplayer.com/product/85309/Pokemon-Gym%20Heroes-Erikas%20Vileplume?xid=a05cee1cb-9066-4705-861b-f97d502f467c&Language=English&Condition=Moderately+Played&page=1",
+    "https://www.tcgplayer.com/product/45123/pokemon-jungle-vaporeon-12?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/87538/Pokemon-Gym%20Heroes-Mistys%20Poliwrath?xid=abbbc8c6b-8d7c-4419-acf2-ec2819e2ff0e&Language=English&Condition=Moderately+Played&page=1",
+
+    "https://www.tcgplayer.com/product/84461/pokemon-dragon-crawdaunt-3-97?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/86101/pokemon-legendary-collection-hitmonlee?Language=English&page=1&Printing=Reverse+Holofoil&Condition=Lightly+Played",
+    "https://www.tcgplayer.com/product/83628/pokemon-ruby-and-sapphire-aron-25-109?Printing=Reverse+Holofoil&Language=English&page=1&Condition=Moderately+Played",
+    "https://www.tcgplayer.com/product/85412/pokemon-neo-genesis-feraligatr-4?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/89760/pokemon-expedition-tauros?Condition=Moderately+Played&Language=English&page=1&Printing=Reverse+Holofoil",
+    "https://www.tcgplayer.com/product/85356/pokemon-aquapolis-exeggutor-13?Printing=Reverse+Holofoil&Language=English&page=1&Condition=Heavily+Played",
+
+    "https://www.tcgplayer.com/product/84353/pokemon-expedition-clefairy?Printing=Reverse+Holofoil&Language=English&page=1&Condition=Moderately+Played",
+    "https://www.tcgplayer.com/product/86873/pokemon-diamond-and-pearl-lucario?Printing=Reverse+Holofoil&Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/87388/pokemon-expedition-metapod?Printing=Reverse+Holofoil&Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/83755/pokemon-ruby-and-sapphire-beautifly?Language=English&page=1&Condition=Moderately+Played",
+    "https://www.tcgplayer.com/product/83755/pokemon-ruby-and-sapphire-beautifly?Language=English&page=1&Condition=Moderately+Played",
+    "https://www.tcgplayer.com/product/83755/pokemon-ruby-and-sapphire-beautifly?Language=English&page=1&Condition=Moderately+Played&Printing=Reverse+Holofoil",
+    "https://www.tcgplayer.com/product/85632/pokemon-ruby-and-sapphire-gardevoir?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/220665/pokemon-burger-king-promos-shinx-98-130-diamond-and-pearl?Condition=Moderately+Played&Language=English&page=1",
+
+    "https://www.tcgplayer.com/product/84204/pokemon-team-rocket-charmander?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/85887/pokemon-legendary-collection-graveler?Condition=Moderately+Played&Language=English&page=1&Printing=Reverse+Holofoil",
+    "https://www.tcgplayer.com/product/45122/pokemon-jungle-snorlax-11?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/42408/pokemon-base-set-squirtle?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/87829/pokemon-aquapolis-octillery?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/84606/pokemon-team-rocket-dark-gyarados-8?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/89388/pokemon-firered-and-leafgreen-snorlax?Condition=Moderately+Played&Language=English&page=1&Printing=Reverse+Holofoil",
+
+    "https://www.tcgplayer.com/product/87549/pokemon-gym-challenge-mistys-tears?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/85319/pokemon-sandstorm-espeon?Condition=Moderately+Played&Language=English&page=1",
+
+    "https://www.tcgplayer.com/product/89872/pokemon-aquapolis-tentacruel?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/87054/pokemon-ruby-and-sapphire-magmar-ex?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/213008/pokemon-burger-king-promos-prinplup-58-130-diamond-and-pearl?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/84172/pokemon-expedition-chansey?Language=English&page=1&Printing=Reverse+Holofoil",
+    "https://www.tcgplayer.com/product/86785/pokemon-sandstorm-lileep-42-100?Printing=Reverse+Holofoil&Language=English&page=1&Condition=Moderately+Played",
+    "https://www.tcgplayer.com/product/84909/pokemon-wotc-promo-dragonite-movie-promo?Condition=Moderately+Played&Language=English&page=1"
   ];
 
   for (const url of urlPages) {
     await page.goto(url, { waitUntil: "networkidle" });
+
+    const pageName = await page.evaluate(() => {
+      const selectors = [
+        "h1",
+        "[data-testid='product-details__name']",
+        "[class*='product-details__name']",
+        "[class*='product-name']",
+      ];
+
+      for (const selector of selectors) {
+        const el = document.querySelector(selector);
+        const text = el?.textContent?.replace(/\s+/g, " ").trim();
+        if (text) return text;
+      }
+
+      const title = document.title?.replace(/\s*-\s*TCGplayer.*$/i, "").trim();
+      return title || null;
+    });
 
     // Some items may have no active listings; skip those pages.
     const hasPrice = await page
@@ -69,6 +120,7 @@ export async function scrapeTCGPlayer() {
 
     if (!hasPrice) {
       console.log("No price found, skipping:", url);
+      allNames.push(pageName);
       allPrices.push(null);
       allShippingCosts.push(null);
       continue;
@@ -133,13 +185,16 @@ export async function scrapeTCGPlayer() {
 
     if (!firstPrice) {
       console.log("No price found, skipping:", url);
+      allNames.push(pageName);
       allPrices.push(null);
       allShippingCosts.push(firstShippingCost);
       continue;
     }
 
+    console.log("Name:", pageName);
     console.log("Price:", firstPrice);
     console.log("Shipping:", firstShippingCost);
+    allNames.push(pageName);
     allPrices.push(firstPrice);
     allShippingCosts.push(firstShippingCost);
 
@@ -148,6 +203,7 @@ export async function scrapeTCGPlayer() {
   await browser.close();
 
   return {
+    names: allNames,
     prices: allPrices,
     shippingCosts: allShippingCosts,
   };
