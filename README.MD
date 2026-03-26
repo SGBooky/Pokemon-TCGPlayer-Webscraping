@@ -6,6 +6,7 @@ The purpose of this project is to be able to get any card from any condition fro
 * npm install dotenv
 * npm install googleapis
 * npm install -g @google/clasp
+* docker HERE
 * download google cloud console https://docs.cloud.google.com/sdk/docs/install-sdk
 * then gcloud auth application-default login --scopes=https://www.googleapis.com/auth/spreadsheets,https://www.googleapis.com/auth/cloud-platform
 
