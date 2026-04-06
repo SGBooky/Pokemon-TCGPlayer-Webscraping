@@ -1,5 +1,6 @@
 import { chromium } from "playwright";
 import fs from 'fs/promises';
+import { urlPages } from "./pokemon-card-links.local.js";
 
 export async function scrapeTCGPlayer() {
   const browser = await chromium.launch({
@@ -31,27 +32,6 @@ export async function scrapeTCGPlayer() {
   const allPrices = [];
   const allShippingCosts = [];
   const allNames = [];
-
-  const urlPages = [
-    // sealed products
-    "https://www.tcgplayer.com/product/108609/Pokemon-XY%20Promos-Latios%20Full%20Art%20Promo?xid=a0f2be362-2abe-4221-a589-33224f324d2d&Language=English&Condition=Near+Mint&page=1",
-    "https://www.tcgplayer.com/product/111531/pokemon-xy-breakpoint-gyarados-ex-secret?page=1&Language=English&Condition=Moderately+Played",
-    "https://www.tcgplayer.com/product/113773/pokemon-generations-radiant-collection-m-gardevoir-ex-full-art?page=1&Language=English&Condition=Near+Mint",
-    "https://www.tcgplayer.com/product/124026/pokemon-xy-evolutions-charizard?page=1&Language=English&Printing=Holofoil",
-    "https://www.tcgplayer.com/product/111558/Pokemon-XY%20BREAKpoint-Espeon%20EX%20Full%20Art?xid=aeba2727e-b618-42c3-bb72-7971c561250f&Language=English&Condition=Lightly+Played&page=1",
-    "https://www.tcgplayer.com/product/113773/pokemon-generations-radiant-collection-m-gardevoir-ex-full-art?Condition=Lightly+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/113763/pokemon-generations-radiant-collection-sylveon-ex?Condition=Lightly+Played|Near+Mint&Language=English&page=1",
-    "https://www.tcgplayer.com/product/107277/Pokemon-XY%20BREAKthrough-Mewtwo%20EX%20157%20Full%20Art?xid=a6891c1fc-e464-45ed-a0ab-4f3501a599a7&Language=English&Condition=Near+Mint&page=1",
-    "https://www.tcgplayer.com/product/111530/Pokemon-XY%20BREAKpoint-Gyarados%20EX%20Full%20Art?xid=a318426f4-fa1b-4e42-83c5-323bcc98bf2d&Language=English&Condition=Lightly+Played&page=1",
-    "https://www.tcgplayer.com/product/94167/pokemon-xy-phantom-forces-gengar-ex?Condition=Lightly+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/131007/Pokemon-SM%20Guardians%20Rising-Sylveon%20GX%20Full%20Art?xid=a77c70e63-75ec-428b-b0a6-7c83be16d312&Language=English&Condition=Near+Mint&page=1",
-    "https://www.tcgplayer.com/product/188409/Pokemon-SM%20Unbroken%20Bonds-Reshiram%20and%20Charizard%20GX?xid=abc8d21db-bdd0-4924-9ce9-ac8ba6b7d79d&Language=English&Condition=Near+Mint&page=1",
-    "https://www.tcgplayer.com/product/85420/pokemon-heartgold-soulsilver-feraligatr-prime?Condition=Lightly+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/108613/Pokemon-XY%20Promos-Arceus%20XY83?xid=a0a31dde4-d07c-49d6-bc90-39e49ce13ec0&Language=English&Condition=Lightly+Played&page=1",
-    "https://www.tcgplayer.com/product/108604/Pokemon-XY%20Promos-Reshiram%20Full%20Art%20Promo?xid=aadac1ec0-a0c8-431b-9def-ad40c96f5072&Language=English&Condition=Lightly+Played&page=1",
-    "https://www.tcgplayer.com/product/194977/Pokemon-SM%20Unified%20Minds-Raichu%20and%20Alolan%20Raichu%20GX?xid=a3c3cd8a8-4797-4a9a-986c-9d9988b2b9ed&Language=English&Condition=Near+Mint&page=1",
-
-  ];
 
   for (const url of urlPages) {
     await page.goto(url, { waitUntil: "networkidle" });
