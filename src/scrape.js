@@ -34,61 +34,23 @@ export async function scrapeTCGPlayer() {
 
   const urlPages = [
     // sealed products
-    "https://www.tcgplayer.com/product/45133/pokemon-jungle-nidoqueen-7?Condition=Moderately+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/108609/Pokemon-XY%20Promos-Latios%20Full%20Art%20Promo?xid=a0f2be362-2abe-4221-a589-33224f324d2d&Language=English&Condition=Near+Mint&page=1",
+    "https://www.tcgplayer.com/product/111531/pokemon-xy-breakpoint-gyarados-ex-secret?page=1&Language=English&Condition=Moderately+Played",
+    "https://www.tcgplayer.com/product/113773/pokemon-generations-radiant-collection-m-gardevoir-ex-full-art?page=1&Language=English&Condition=Near+Mint",
+    "https://www.tcgplayer.com/product/124026/pokemon-xy-evolutions-charizard?page=1&Language=English&Printing=Holofoil",
+    "https://www.tcgplayer.com/product/111558/Pokemon-XY%20BREAKpoint-Espeon%20EX%20Full%20Art?xid=aeba2727e-b618-42c3-bb72-7971c561250f&Language=English&Condition=Lightly+Played&page=1",
+    "https://www.tcgplayer.com/product/113773/pokemon-generations-radiant-collection-m-gardevoir-ex-full-art?Condition=Lightly+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/113763/pokemon-generations-radiant-collection-sylveon-ex?Condition=Lightly+Played|Near+Mint&Language=English&page=1",
+    "https://www.tcgplayer.com/product/107277/Pokemon-XY%20BREAKthrough-Mewtwo%20EX%20157%20Full%20Art?xid=a6891c1fc-e464-45ed-a0ab-4f3501a599a7&Language=English&Condition=Near+Mint&page=1",
+    "https://www.tcgplayer.com/product/111530/Pokemon-XY%20BREAKpoint-Gyarados%20EX%20Full%20Art?xid=a318426f4-fa1b-4e42-83c5-323bcc98bf2d&Language=English&Condition=Lightly+Played&page=1",
+    "https://www.tcgplayer.com/product/94167/pokemon-xy-phantom-forces-gengar-ex?Condition=Lightly+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/131007/Pokemon-SM%20Guardians%20Rising-Sylveon%20GX%20Full%20Art?xid=a77c70e63-75ec-428b-b0a6-7c83be16d312&Language=English&Condition=Near+Mint&page=1",
+    "https://www.tcgplayer.com/product/188409/Pokemon-SM%20Unbroken%20Bonds-Reshiram%20and%20Charizard%20GX?xid=abc8d21db-bdd0-4924-9ce9-ac8ba6b7d79d&Language=English&Condition=Near+Mint&page=1",
+    "https://www.tcgplayer.com/product/85420/pokemon-heartgold-soulsilver-feraligatr-prime?Condition=Lightly+Played&Language=English&page=1",
+    "https://www.tcgplayer.com/product/108613/Pokemon-XY%20Promos-Arceus%20XY83?xid=a0a31dde4-d07c-49d6-bc90-39e49ce13ec0&Language=English&Condition=Lightly+Played&page=1",
+    "https://www.tcgplayer.com/product/108604/Pokemon-XY%20Promos-Reshiram%20Full%20Art%20Promo?xid=aadac1ec0-a0c8-431b-9def-ad40c96f5072&Language=English&Condition=Lightly+Played&page=1",
+    "https://www.tcgplayer.com/product/194977/Pokemon-SM%20Unified%20Minds-Raichu%20and%20Alolan%20Raichu%20GX?xid=a3c3cd8a8-4797-4a9a-986c-9d9988b2b9ed&Language=English&Condition=Near+Mint&page=1",
 
-    "https://www.tcgplayer.com/product/44422/pokemon-fossil-muk-13?Language=English&Condition=Moderately+Played&page=1",
-    "https://www.tcgplayer.com/product/85673/pokemon-expedition-gengar-48?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/42417/pokemon-base-set-computer-search?srsltid=AfmBOopxbJtQLolm1tI_hPaCfrR6qgEN5i8N8P0osoQ6AIQVsyUbJRRy&Language=English&Condition=Moderately+Played&page=1",
-    "https://www.tcgplayer.com/product/86744/pokemon-neo-destiny-light-machamp?srsltid=AfmBOopj4o73Li7gGFIDaZg7s7lcDIF5-uxQrx8wc1nniZswaihZm0a6&Language=English&Condition=Moderately+Played&page=1",
-    "https://www.tcgplayer.com/product/87524/pokemon-gym-heroes-misty-102?Language=English&page=1&Condition=Moderately+Played",
-
-    "https://www.tcgplayer.com/product/83538/pokemon-expedition-ampharos-2?Condition=Moderately+Played&Language=English&page=1&Printing=Holofoil",
-    "https://www.tcgplayer.com/product/86737/Pokemon-Neo%20Destiny-Light%20Dragonair?xid=ad99a82ce-173c-416d-8ed0-774da8955431&Language=English&Condition=Moderately+Played&page=1",
-    "https://www.tcgplayer.com/product/45163/pokemon-jungle-pikachu?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/88882/Pokemon-Gym%20Challenge-Sabrinas%20Kadabra?xid=a355e1077-d770-47a2-8112-d6df11ca7ff0&Language=English&Condition=Moderately+Played&page=1",
-    "https://www.tcgplayer.com/product/85415/pokemon-expedition-feraligatr-46?Condition=Moderately+Played&Language=English&page=1",
-
-    "https://www.tcgplayer.com/product/89007/pokemon-ruby-and-sapphire-scyther-ex?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/87394/pokemon-wotc-promo-mew-8?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/86649/pokemon-nintendo-promos-latias-014-pokemon-heroes-latios-and-latias-dvd-release?country=US&utm_campaign=20451986774&utm_source=google&utm_medium=cpc&utm_content=&utm_term=&adgroupid=&gad_source=1&gad_campaignid=20451985907&gbraid=0AAAAADHLWY3P2xQVXRV6Fki1gIWUd5WR8&gclid=CjwKCAjwspPOBhB9EiwATFbi5Bkl6myypi5aqkEke-iMWkRON4wfhvfNSNtHWVCwlObDf0MGIs8slhoCbiMQAvD_BwE&Language=English&Condition=Moderately+Played&page=1",
-
-    "https://www.tcgplayer.com/product/85309/Pokemon-Gym%20Heroes-Erikas%20Vileplume?xid=a05cee1cb-9066-4705-861b-f97d502f467c&Language=English&Condition=Moderately+Played&page=1",
-    "https://www.tcgplayer.com/product/45123/pokemon-jungle-vaporeon-12?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/87538/Pokemon-Gym%20Heroes-Mistys%20Poliwrath?xid=abbbc8c6b-8d7c-4419-acf2-ec2819e2ff0e&Language=English&Condition=Moderately+Played&page=1",
-
-    "https://www.tcgplayer.com/product/84461/pokemon-dragon-crawdaunt-3-97?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/86101/pokemon-legendary-collection-hitmonlee?Language=English&page=1&Printing=Reverse+Holofoil&Condition=Lightly+Played",
-    "https://www.tcgplayer.com/product/83628/pokemon-ruby-and-sapphire-aron-25-109?Printing=Reverse+Holofoil&Language=English&page=1&Condition=Moderately+Played",
-    "https://www.tcgplayer.com/product/85412/pokemon-neo-genesis-feraligatr-4?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/89760/pokemon-expedition-tauros?Condition=Moderately+Played&Language=English&page=1&Printing=Reverse+Holofoil",
-    "https://www.tcgplayer.com/product/85356/pokemon-aquapolis-exeggutor-13?Printing=Reverse+Holofoil&Language=English&page=1&Condition=Heavily+Played",
-
-    "https://www.tcgplayer.com/product/84353/pokemon-expedition-clefairy?Printing=Reverse+Holofoil&Language=English&page=1&Condition=Moderately+Played",
-    "https://www.tcgplayer.com/product/86873/pokemon-diamond-and-pearl-lucario?Printing=Reverse+Holofoil&Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/87388/pokemon-expedition-metapod?Printing=Reverse+Holofoil&Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/83755/pokemon-ruby-and-sapphire-beautifly?Language=English&page=1&Condition=Moderately+Played",
-    "https://www.tcgplayer.com/product/83755/pokemon-ruby-and-sapphire-beautifly?Language=English&page=1&Condition=Moderately+Played",
-    "https://www.tcgplayer.com/product/83755/pokemon-ruby-and-sapphire-beautifly?Language=English&page=1&Condition=Moderately+Played&Printing=Reverse+Holofoil",
-    "https://www.tcgplayer.com/product/85632/pokemon-ruby-and-sapphire-gardevoir?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/220665/pokemon-burger-king-promos-shinx-98-130-diamond-and-pearl?Condition=Moderately+Played&Language=English&page=1",
-
-    "https://www.tcgplayer.com/product/84204/pokemon-team-rocket-charmander?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/85887/pokemon-legendary-collection-graveler?Condition=Moderately+Played&Language=English&page=1&Printing=Reverse+Holofoil",
-    "https://www.tcgplayer.com/product/45122/pokemon-jungle-snorlax-11?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/42408/pokemon-base-set-squirtle?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/87829/pokemon-aquapolis-octillery?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/84606/pokemon-team-rocket-dark-gyarados-8?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/89388/pokemon-firered-and-leafgreen-snorlax?Condition=Moderately+Played&Language=English&page=1&Printing=Reverse+Holofoil",
-
-    "https://www.tcgplayer.com/product/87549/pokemon-gym-challenge-mistys-tears?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/85319/pokemon-sandstorm-espeon?Condition=Moderately+Played&Language=English&page=1",
-
-    "https://www.tcgplayer.com/product/89872/pokemon-aquapolis-tentacruel?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/87054/pokemon-ruby-and-sapphire-magmar-ex?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/213008/pokemon-burger-king-promos-prinplup-58-130-diamond-and-pearl?Condition=Moderately+Played&Language=English&page=1",
-    "https://www.tcgplayer.com/product/84172/pokemon-expedition-chansey?Language=English&page=1&Printing=Reverse+Holofoil",
-    "https://www.tcgplayer.com/product/86785/pokemon-sandstorm-lileep-42-100?Printing=Reverse+Holofoil&Language=English&page=1&Condition=Moderately+Played",
-    "https://www.tcgplayer.com/product/84909/pokemon-wotc-promo-dragonite-movie-promo?Condition=Moderately+Played&Language=English&page=1"
   ];
 
   for (const url of urlPages) {
