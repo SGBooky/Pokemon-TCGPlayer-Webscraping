@@ -4,7 +4,7 @@ import { urlPages } from "./pokemon-card-links.local.js";
 
 export async function scrapeTCGPlayer() {
   const browser = await chromium.launch({
-    headless: false,   // set false to watch it work locally
+    headless: true,   // set false to watch it work locally
     args: [
     '--no-sandbox',
     '--disable-setuid-sandbox',
