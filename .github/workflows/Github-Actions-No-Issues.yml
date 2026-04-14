@@ -23,6 +23,9 @@ jobs:
       - name: install Playwright browsers
         run: npx playwright install
 
+      - name: install dotenv
+        run: npm install dotenv
+
       - name: Check JavaScript syntax
         run: |
           node --check src/index.js
