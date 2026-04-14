@@ -30,4 +30,6 @@ jobs:
           node --check src/sheets.js
 
       - name: Verify entrypoint can load
-        run: node -e "import('./src/index.js')"
+        run: |
+          xvfb-run './src/index.js'
+          node -e "import('./src/index.js')"
