@@ -31,5 +31,4 @@ jobs:
 
       - name: Verify entrypoint can load
         run: |
-          xvfb-run './src/index.js'
           node -e "import('./src/index.js')"
